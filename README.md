@@ -1,4 +1,6 @@
 # ProjectFiles
 Version control for files
+MAKE SURE TO PULL BEFORE UPDATING ANY CODE AND MAKE SURE TO PUSH YOUR CHANGES AFTER.
 
-This is a test.
+Make folders or modify code freely.
+You are given admin authority.
