@@ -15,7 +15,7 @@ import com.teamdev.jxbrowser.chromium.swing.BrowserView;
 public class GoogleMapsSample {
    public static void main(String[] args) throws IOException {
 	   
-	   FileInputStream input = null;
+       FileInputStream input = null;
        FileOutputStream output = null;
 
        try {
