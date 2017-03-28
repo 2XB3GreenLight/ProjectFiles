@@ -1,0 +1,28 @@
+ELEMENTS
+VALUES
+Clear
+1
+Cloudy
+2
+Fog/smoke/smog
+3
+Freezing rain/drizzle
+4
+Rain
+5
+Sleet/hail
+6
+Snow
+7
+Blowing snow
+8
+Severe winds
+9
+Blowing sand/soil/dirt
+10
+Other (explain in narrative)
+98
+Unknown
+99
+Not Reported
+77
