@@ -34,19 +34,23 @@ public class crashGraph {
 			double thisLat = crashArr[crashIndex][1];
 			double otherLong = crashArr[i][2];
 			double thisLong = crashArr[crashIndex][2];
-			if (otherLat > thisLat && (otherLat - thisLat) <= distN) {
+			if (otherLat > thisLat && (otherLat - thisLat) <= distN && (otherLong - thisLong < 0.01)
+					&& (thisLong - otherLong < 0.01)) {
 				distN = otherLat - thisLat;
 				NSWEcrash[0] = i;
 			}
-			if (otherLat < thisLat && (thisLat - otherLat) <= distS) {
+			if (otherLat < thisLat && (thisLat - otherLat) <= distS && (otherLong - thisLong < 0.01)
+					&& (thisLong - otherLong < 0.01)) {
 				distS = thisLat - otherLat;
 				NSWEcrash[1] = i;
 			}
-			if (otherLong > thisLong && (otherLong - thisLong) <= distW) {
+			if (otherLong > thisLong && (otherLong - thisLong) <= distW && (otherLat - thisLat < 0.01)
+					&& (thisLat - otherLat < 0.01)) {
 				distW = otherLong - thisLong;
 				NSWEcrash[2] = i;
 			}
-			if (otherLong < thisLong && (thisLong - otherLong) <= distE) {
+			if (otherLong < thisLong && (thisLong - otherLong) <= distE && (otherLat - thisLat < 0.01)
+					&& (thisLat - otherLat < 0.01)) {
 				distE = thisLong - otherLong;
 				NSWEcrash[3] = i;
 			}
@@ -55,16 +59,14 @@ public class crashGraph {
 		return NSWEcrash;
 	}
 
-
-	public static void main(String args[]) throws IOException {
+	public static EdgeWeightedDigraph fullGraph() throws IOException {
 
 		EdgeWeightedDigraph G = new EdgeWeightedDigraph(Data.getCollisionCount());
 
 		crashArr = Data.getArray();
 
-		for (int i = 0; i < Data.getCollisionCount(); i++) {
-			// if (northCrash(i) != 0 && southCrash(i) != 0 && westCrash(i) != 0
-			// && eastCrash(i) != 0) {
+		for (int i = 0; i < 10; i++) {
+
 			int[] NSWEcrash = NSWECrashes(i);
 			int n = NSWEcrash[0];
 			int s = NSWEcrash[1];
@@ -78,17 +80,10 @@ public class crashGraph {
 			G.addEdge(westC);
 			DirectedEdge eastC = new DirectedEdge(i, e, crashSeverity(crashArr[i]) + crashSeverity(crashArr[e]));
 			G.addEdge(eastC);
-			// }
+
 		}
 
-		System.out.println(G.E());
-
-		// System.out.println(Data.getCollisionCount());
-		// System.out.println(northCrash(1));
-		// System.out.println(southCrash(1));
-		// System.out.println(westCrash(1));
-		// System.out.println(eastCrash(80672));
-		// System.out.println(crashArr[80672][2]);
+		return G;
 
 	}
 
