@@ -26,10 +26,9 @@ public class ClosestPoint {
 			double dLat = Math.toRadians((pts[i][1])-lat);
 			double dLng = Math.toRadians((pts[i][2])-lng);
 			
-			double t = 
-				    Math.sin(dLat/2) * Math.sin(dLat/2) +
-				    Math.cos(Math.toRadians((lat))) * Math.cos(Math.toRadians((pts[i][1]))) * 
-				    Math.sin(dLng/2) * Math.sin(dLng/2); 
+			double t = Math.sin(dLat/2) * Math.sin(dLat/2) +
+					   Math.cos(Math.toRadians((lat))) * Math.cos(Math.toRadians((pts[i][1]))) * 
+					   Math.sin(dLng/2) * Math.sin(dLng/2); 
 			
 			double tdist = r * (2 * Math.atan2(Math.sqrt(t), Math.sqrt(1-t)));
 			if (tdist < dist){
