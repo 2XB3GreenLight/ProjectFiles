@@ -35,7 +35,6 @@ public class ClosestPoint {
 				dist = tdist;
 				closest = i;
 			}
-			System.out.println(tdist);
 			
 		}
 		
