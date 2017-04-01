@@ -16,18 +16,22 @@ public class ClosestPoint {
 	 * @param lng Longitude of given point.
 	 * @return Returns the array representing the closest point.
 	 */
-	public static Double[] closest(Double[][] pts, double lat, double lng){
+	public static Collision closest(Collision[] pts, double lat, double lng){
 		int closest=0;
-		double dist=999999999999999999.0;
+		double dist=99999999999999.0;
+		
+		
 		for(int i = 0 ; i <= pts.length-1;i++){
 		
 			double r = 6371000;
 			
-			double dLat = Math.toRadians((pts[i][1])-lat);
-			double dLng = Math.toRadians((pts[i][2])-lng);
+			
+			
+			double dLat = Math.toRadians(pts[i].getLat()-lat);
+			double dLng = Math.toRadians(pts[i].getLng()-lng);
 			
 			double t = Math.sin(dLat/2) * Math.sin(dLat/2) +
-					   Math.cos(Math.toRadians((lat))) * Math.cos(Math.toRadians((pts[i][1]))) * 
+					   Math.cos(Math.toRadians((lat))) * Math.cos(Math.toRadians(pts[i].getLat())) * 
 					   Math.sin(dLng/2) * Math.sin(dLng/2); 
 			
 			double tdist = r * (2 * Math.atan2(Math.sqrt(t), Math.sqrt(1-t)));
@@ -36,11 +40,11 @@ public class ClosestPoint {
 				closest = i;
 			}
 			
+			
 		}
 		
 		return pts[closest];
 	}
-	
-	
+
 
 }
