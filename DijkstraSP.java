@@ -233,58 +233,6 @@ public class DijkstraSP {
 			throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
 	}
 
-	/**
-	 * Unit tests the {@code DijkstraSP} data type.
-	 *
-	 * @param args
-	 *            the command-line arguments
-	 */
-	public static void main(String[] args) {
-
-		EdgeWeightedDigraph G = new EdgeWeightedDigraph(Data.getCollisionCount());
-
-		Heap.sort(Data.getArray(), 2);
-		double[][] crashArr = Data.getArray();
-
-		// First, make the graph:
-		for (int i = 0; i < 1250; i++) {
-			// if (northCrash(i) != 0 && southCrash(i) != 0 && westCrash(i) != 0
-			// && eastCrash(i) != 0) {
-			int[] NSWEcrash = crashGraph.NSWECrashes(i);
-			int n = NSWEcrash[0];
-			int s = NSWEcrash[1];
-			int w = NSWEcrash[2];
-			int e = NSWEcrash[3];
-			DirectedEdge northC = new DirectedEdge(i, n,
-					crashGraph.crashSeverity(crashArr[i]) + crashGraph.crashSeverity(crashArr[n]));
-			G.addEdge(northC);
-			DirectedEdge southC = new DirectedEdge(i, s,
-					crashGraph.crashSeverity(crashArr[i]) + crashGraph.crashSeverity(crashArr[s]));
-			G.addEdge(southC);
-			DirectedEdge westC = new DirectedEdge(i, w,
-					crashGraph.crashSeverity(crashArr[i]) + crashGraph.crashSeverity(crashArr[w]));
-			G.addEdge(westC);
-			DirectedEdge eastC = new DirectedEdge(i, e,
-					crashGraph.crashSeverity(crashArr[i]) + crashGraph.crashSeverity(crashArr[e]));
-			G.addEdge(eastC);
-			// }
-		}
-
-
-		// Then find the shortest paths from point 1 (for example) to whatever:
-		DijkstraSP sp = new DijkstraSP(G, 1);
-
-		// print shortest path from point 1 to t:
-		for (int t = 0; t < G.V(); t++) {
-			if (sp.hasPathTo(t)) {
-				System.out.printf("%d to %d (%.2f)  ", 1, t, sp.distTo(t));
-				for (DirectedEdge e : sp.pathTo(t)) {
-					System.out.print(e + "   ");
-				}
-				System.out.println();
-			}
-		}
-	}
 }
 
 /******************************************************************************

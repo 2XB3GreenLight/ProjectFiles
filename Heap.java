@@ -23,6 +23,7 @@ package cas2xb3.greenlight;
  *
  ******************************************************************************/
 
+
 /**
  *  The {@code Heap} class provides a static methods for heapsorting
  *  an array.
@@ -40,15 +41,15 @@ public class Heap {
 
     /**
      * Rearranges the array in ascending order, using the natural order.
-     * @param is the array to be sorted
+     * @param pq the array to be sorted
      */
-    public static void sort(double[][] is, int type) {
-        int n = is.length;
+    public static void sort(Comparable[] pq) {
+        int n = pq.length;
         for (int k = n/2; k >= 1; k--)
-            sink(is, k, n,type);
+            sink(pq, k, n);
         while (n > 1) {
-            exch(is, 1, n--);
-            sink(is, 1, n,type);
+            exch(pq, 1, n--);
+            sink(pq, 1, n);
         }
     }
 
@@ -56,11 +57,11 @@ public class Heap {
     * Helper functions to restore the heap invariant.
     ***************************************************************************/
 
-    private static void sink(double[][] pq, int k, int n, int type) {
+    private static void sink(Comparable[] pq, int k, int n) {
         while (2*k <= n) {
             int j = 2*k;
-            if (j < n && less(pq, j, j+1,type)) j++;
-            if (!less(pq, k, j,type)) break;
+            if (j < n && less(pq, j, j+1)) j++;
+            if (!less(pq, k, j)) break;
             exch(pq, k, j);
             k = j;
         }
@@ -70,14 +71,14 @@ public class Heap {
     * Helper functions for comparisons and swaps.
     * Indices are "off-by-one" to support 1-based indexing.
     ***************************************************************************/
-    private static boolean less(double[][] pq, int i, int j, int type) {
-        return pq[i-1][type] < (pq[j-1][type]);
+    private static boolean less(Comparable[] pq, int i, int j) {
+        return pq[i-1].compareTo(pq[j-1]) < 0;
     }
 
-    private static void exch(double[][] is, int i, int j) {
-        double[] swap = is[i-1];
-        is[i-1] = is[j-1];
-        is[j-1] = swap;
+    private static void exch(Object[] pq, int i, int j) {
+        Object swap = pq[i-1];
+        pq[i-1] = pq[j-1];
+        pq[j-1] = swap;
     }
 
 }
