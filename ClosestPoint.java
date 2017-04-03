@@ -16,7 +16,7 @@ public class ClosestPoint {
 	 * @param lng Longitude of given point.
 	 * @return Returns the array representing the closest point.
 	 */
-	public static Collision closest(Collision[] pts, double lat, double lng){
+	public static int closest(Collision[] pts, double lat, double lng){
 		double delta = 0.163399394; //5% range
 		int floorIndex; //lower index of sub array
 		int ceilingIndex; //higher index of sub array
@@ -60,7 +60,7 @@ public class ClosestPoint {
 			
 		}
 		
-		return pts[closest];
+		return closest;
 	}
 	
 	
