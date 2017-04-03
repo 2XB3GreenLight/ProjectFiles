@@ -1,7 +1,6 @@
 package cas2xb3.greenlight;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class CrashGraph {
 
@@ -65,13 +64,10 @@ public class CrashGraph {
 		return NSWEcrash;
 	}
 
-	public static void main(String args[]) throws IOException {
+	public static EdgeWeightedDigraph FinalGraph() throws IOException {
 		EdgeWeightedDigraph G = new EdgeWeightedDigraph(Data.getCollisionCount());
 		crashArr = Data.getArray();
-		for (int i = 10000; i < 20000; i++) { // 10 instead of
-										// Data.getCollisionCount()
-			// if (NSWECrashes(i)[0] != 0 && NSWECrashes(i)[1] != 0 &&
-			// NSWECrashes(i)[2] != 0 && NSWECrashes(i)[3] != 0) {
+		for (int i = 0; i < G.V(); i++) {
 			int[] NSWEcrash = NSWECrashes(i);
 			int n = NSWEcrash[0];
 			int s = NSWEcrash[1];
@@ -93,19 +89,7 @@ public class CrashGraph {
 				DirectedEdge eastC = new DirectedEdge(i, e, (crashArr[i]).getEquation() + (crashArr[e]).getEquation());
 				G.addEdge(eastC);
 			}
-			// }
 		}
-		PrintWriter wr = new PrintWriter("graph.txt");
-		// System.out.println(Data.getCollisionCount());
-		// System.out.println(NSWECrashes(1)[0]);
-		// System.out.println(NSWECrashes(80672)[3]);
-		// System.out.println(G.E());
-		wr.println(G.toString());
-
-		System.out.println(crashArr[12834].getLat());
-		System.out.println(crashArr[57595].getLat());
-
-		wr.close();
-
+		return G;
 	}
 }
