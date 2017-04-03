@@ -17,11 +17,28 @@ public class ClosestPoint {
 	 * @return Returns the array representing the closest point.
 	 */
 	public static Collision closest(Collision[] pts, double lat, double lng){
-		int closest=0;
-		double dist=99999999999999.0;
+		double delta = 0.163399394; //5% range
+		int floorIndex; //lower index of sub array
+		int ceilingIndex; //higher index of sub array
 		
 		
-		for(int i = 0 ; i <= pts.length-1;i++){
+		//search latitudes.
+		Collision dummy; //dummy object to compare latitudes with
+		//loop until at least one point is in the given range
+		do{
+			dummy  = new Collision(0, lat-delta, 0, 0, 0, 0);
+			floorIndex = BinarySearch.indexOf(pts, dummy, 0, pts.length);
+			dummy = new Collision(0, lat+delta, 0, 0, 0, 0);
+			ceilingIndex = BinarySearch.indexOf(pts, dummy, 0, pts.length);
+			delta += 0.163399394; //increase the range by 5%
+			System.out.println("increasing delta");
+		}while(floorIndex == ceilingIndex);
+
+		
+		int closest=0; //index of the closest point
+		double dist=9999999999.0;
+		//search from floor to ceiling
+		for(int i = floorIndex ; i < ceilingIndex ;i++){
 		
 			double r = 6371000;
 			
@@ -45,6 +62,7 @@ public class ClosestPoint {
 		
 		return pts[closest];
 	}
-
+	
+	
 
 }
