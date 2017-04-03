@@ -1,6 +1,7 @@
 package cas2xb3.greenlight;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class CrashGraph {
 
@@ -21,10 +22,10 @@ public class CrashGraph {
 	public static int[] NSWECrashes(int crashIndex) {
 		crashArr = Data.getArray();
 		int[] NSWEcrash = new int[4];
-		NSWEcrash[0] = 0;
-		NSWEcrash[1] = 0;
-		NSWEcrash[2] = 0;
-		NSWEcrash[3] = 0;
+		NSWEcrash[0] = 90000;
+		NSWEcrash[1] = 90000;
+		NSWEcrash[2] = 90000;
+		NSWEcrash[3] = 90000;
 		double distN = 100.0;
 		double distS = 100.0;
 		double distW = 100.0;
@@ -34,20 +35,29 @@ public class CrashGraph {
 			double thisLat = crashArr[crashIndex].getLat();
 			double otherLong = crashArr[i].getLng();
 			double thisLong = crashArr[crashIndex].getLng();
-			if (otherLat > thisLat && (otherLat - thisLat) <= distN) {
+			double posEdge = otherLong + (thisLat - thisLong);
+			double negEdge = -otherLong + (thisLat + thisLong);
+			// NORTHERN REGION
+			if ((otherLat - thisLat) <= distN && otherLat > posEdge && otherLat > negEdge) {
+				// if (otherLat > thisLat && (otherLat - thisLat) <= distN) {
 				distN = otherLat - thisLat;
 				NSWEcrash[0] = i;
 			}
-			if (otherLat < thisLat && (thisLat - otherLat) <= distS) {
+			// SOUTHERN REGION
+			if ((thisLat - otherLat) <= distS && otherLat < negEdge && otherLat < posEdge) {
 				distS = thisLat - otherLat;
 				NSWEcrash[1] = i;
 			}
-			if (otherLong > thisLong && (otherLong - thisLong) <= distW) {
-				distW = otherLong - thisLong;
+			// WESTERN REGION
+			if ((thisLong - otherLong) <= distW && (thisLong - otherLong) > 0 && otherLat < negEdge
+					&& otherLat > posEdge) {
+				distW = thisLong - otherLong;
 				NSWEcrash[2] = i;
 			}
-			if (otherLong < thisLong && (thisLong - otherLong) <= distE) {
-				distE = thisLong - otherLong;
+			// EASTERN REGION
+			if ((otherLong - thisLong) <= distE && (otherLong - thisLong) > 0 && otherLat < posEdge
+					&& otherLat > negEdge) {
+				distE = otherLong - thisLong;
 				NSWEcrash[3] = i;
 			}
 		}
@@ -55,41 +65,47 @@ public class CrashGraph {
 		return NSWEcrash;
 	}
 
-
-	/*public static void main(String args[]) throws IOException {
-
+	public static void main(String args[]) throws IOException {
 		EdgeWeightedDigraph G = new EdgeWeightedDigraph(Data.getCollisionCount());
-
 		crashArr = Data.getArray();
-
-		for (int i = 0; i < Data.getCollisionCount(); i++) {
-			// if (northCrash(i) != 0 && southCrash(i) != 0 && westCrash(i) != 0
-			// && eastCrash(i) != 0) {
+		for (int i = 10000; i < 20000; i++) { // 10 instead of
+										// Data.getCollisionCount()
+			// if (NSWECrashes(i)[0] != 0 && NSWECrashes(i)[1] != 0 &&
+			// NSWECrashes(i)[2] != 0 && NSWECrashes(i)[3] != 0) {
 			int[] NSWEcrash = NSWECrashes(i);
 			int n = NSWEcrash[0];
 			int s = NSWEcrash[1];
 			int w = NSWEcrash[2];
 			int e = NSWEcrash[3];
-			DirectedEdge northC = new DirectedEdge(i, n, crashSeverity(crashArr[i]) + crashSeverity(crashArr[n]));
-			G.addEdge(northC);
-			DirectedEdge southC = new DirectedEdge(i, s, crashSeverity(crashArr[i]) + crashSeverity(crashArr[s]));
-			G.addEdge(southC);
-			DirectedEdge westC = new DirectedEdge(i, w, crashSeverity(crashArr[i]) + crashSeverity(crashArr[w]));
-			G.addEdge(westC);
-			DirectedEdge eastC = new DirectedEdge(i, e, crashSeverity(crashArr[i]) + crashSeverity(crashArr[e]));
-			G.addEdge(eastC);
+			if (n != 90000) {
+				DirectedEdge northC = new DirectedEdge(i, n, (crashArr[i]).getEquation() + (crashArr[n]).getEquation());
+				G.addEdge(northC);
+			}
+			if (s != 90000) {
+				DirectedEdge southC = new DirectedEdge(i, s, (crashArr[i]).getEquation() + (crashArr[s]).getEquation());
+				G.addEdge(southC);
+			}
+			if (w != 90000) {
+				DirectedEdge westC = new DirectedEdge(i, w, (crashArr[i]).getEquation() + (crashArr[w]).getEquation());
+				G.addEdge(westC);
+			}
+			if (e != 90000) {
+				DirectedEdge eastC = new DirectedEdge(i, e, (crashArr[i]).getEquation() + (crashArr[e]).getEquation());
+				G.addEdge(eastC);
+			}
 			// }
 		}
-
-		System.out.println(G.E());
-
+		PrintWriter wr = new PrintWriter("graph.txt");
 		// System.out.println(Data.getCollisionCount());
-		// System.out.println(northCrash(1));
-		// System.out.println(southCrash(1));
-		// System.out.println(westCrash(1));
-		// System.out.println(eastCrash(80672));
-		// System.out.println(crashArr[80672][2]);
+		// System.out.println(NSWECrashes(1)[0]);
+		// System.out.println(NSWECrashes(80672)[3]);
+		// System.out.println(G.E());
+		wr.println(G.toString());
+
+		System.out.println(crashArr[12834].getLat());
+		System.out.println(crashArr[57595].getLat());
+
+		wr.close();
 
 	}
-*/
 }
