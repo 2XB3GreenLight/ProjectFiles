@@ -31,7 +31,6 @@ public class ClosestPoint {
 			dummy = new Collision(0, lat+delta, 0, 0, 0, 0);
 			ceilingIndex = BinarySearch.indexOf(pts, dummy, 0, pts.length);
 			delta += 0.163399394; //increase the range by 5%
-			System.out.println("increasing delta");
 		}while(floorIndex == ceilingIndex);
 
 		
