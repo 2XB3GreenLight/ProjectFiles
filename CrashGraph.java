@@ -29,13 +29,20 @@ public class CrashGraph {
 		double distS = 100.0;
 		double distW = 100.0;
 		double distE = 100.0;
-		for (int i = 0; i < Data.getCollisionCount(); i++) {
+
+		int low = crashIndex - 10000;
+		int hi = crashIndex + 10000;
+		if (low < 0) low = 0;
+		if (hi > Data.getCollisionCount()) hi = Data.getCollisionCount();
+		
+		for (int i = low; i < hi; i++) {
 			double otherLat = crashArr[i].getLat();
 			double thisLat = crashArr[crashIndex].getLat();
 			double otherLong = crashArr[i].getLng();
 			double thisLong = crashArr[crashIndex].getLng();
 			double posEdge = otherLong + (thisLat - thisLong);
 			double negEdge = -otherLong + (thisLat + thisLong);
+			
 			// NORTHERN REGION
 			if ((otherLat - thisLat) <= distN && otherLat > posEdge && otherLat > negEdge) {
 				// if (otherLat > thisLat && (otherLat - thisLat) <= distN) {
