@@ -42,8 +42,10 @@ public class GoogleMapsSample {
 	
 	public static List modifylist(List list){
 		
-		templist = new ArrayList();
+		List<String> templist = new ArrayList();
 		
+		if (list.size() > 23){
+
 		int index = (list.size() / 23) + 1;
 		
 		int remove = list.size() - list.size() / index;
@@ -51,23 +53,24 @@ public class GoogleMapsSample {
 		int count = 0;
 		
 		count = 23 - remove;
-		
 
-		for (int i = 0; i < list.size() ; i = i + index){
+		for (int i = 0; i < list.size() - 1; i = i + index){
 			
 			
 			templist.add((String) list.get(i));
 			
 			if ( count != 0){
 				
-				templist.add((String) list.get(i + 1));
+				//templist.add((String) list.get(i + 1));
 				
-				count--;
+				//count--;
 				
 			}
 			
 		}
-		
+		}else{
+			templist = list;
+		}
 		return templist;
 
 	}
@@ -95,25 +98,15 @@ public class GoogleMapsSample {
 	
 	public static void userinput(List Inputlist) throws IOException{
 		
-		//list = new ArrayList<String>();
-		
-		//list.add("Newton, Iowa");
-		//list.add("Iowa City");
-		
 		list = Inputlist;
 		
 		Collections.reverse(list);
 		
 		sc = new Scanner(System.in);
-		//System.out.println("Please enter a location");
-		//location = sc.nextLine();
-		location = "Vancouver";
-		location = GeoCodingSample.getCoordinates(location);
 
-		//System.out.println("Please enter a destination");
-		//destination = sc.nextLine();
-		destination = "Chicago";
-		destination = GeoCodingSample.getCoordinates(destination);
+		location = GreenLight.origin;
+
+		destination = GreenLight.destination;
 
 		oldFileName = "data/maps.txt";
 		tmpFileName = "data/tmp_maps.txt";
@@ -225,93 +218,6 @@ public class GoogleMapsSample {
 		
 		return r * (2 * Math.atan2(Math.sqrt(t), Math.sqrt(1-t)));
 		
-	}
-
-	public static void main(String[] args) throws IOException {
-		
-		List nodes = new ArrayList();
-		
-		nodes.add("Seattle");
-		
-		nodes.add("Calgary");
-
-		nodes.add("Edmonton");
-
-		nodes.add("Regina");
-
-		nodes.add("Saskatoon");
-
-		nodes.add("Minneapolis");
-
-		nodes.add("Winnipeg");
-
-		nodes.add("Kenora");
-
-		nodes.add("Thunder Bay");
-
-		nodes.add("North Bay");
-
-		nodes.add("Sudbury");
-
-		nodes.add("Barrie");
-
-		nodes.add("Toronto");
-
-		nodes.add("Buffalo");
-
-		nodes.add("Albany");
-
-		nodes.add("New York");
-
-		nodes.add("Boston");
-
-		nodes.add("Montreal");
-
-		nodes.add("Sarnia");
-
-		nodes.add("Detroit");
-		
-		nodes.add("Colombus");
-		
-		nodes.add("St. Louis");
-
-		nodes.add("Des Moines");
-		
-		nodes.add("Cedar Rapids");
-		
-		nodes.add("Iowa City");
-		
-		nodes.add("Sioux City");
-		
-
-		nodes = modifylist(nodes);
-		
-
-		userinput(nodes);
-
-		
-		final Browser browser = new Browser();
-		BrowserView browserView = new BrowserView(browser);
-
-		JFrame frame = new JFrame("maps.html");
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.add(browserView, BorderLayout.CENTER);
-		frame.setSize(900, 500);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-
-		browser.loadHTML(genHtml());
-
-		cleanup();
-		
-	
-		//System.out.println(23 / 23);
-		
-		//System.out.println(24 / 2);
-		
-		//System.out.print(modifylist(nodes).size());
-		
-		//System.out.println(modifylist(nodes));
 	}
 
 }
