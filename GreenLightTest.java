@@ -16,13 +16,19 @@ import cas2xb3.greenlight.Collision;
 import cas2xb3.greenlight.CrashGraph;
 import cas2xb3.greenlight.Data;
 import cas2xb3.greenlight.GoogleMapsGeocoder;
-import cas2xb3.greenlight.GreenLight;
 import edu.princeton.cs.algs4.DijkstraSP;
 import edu.princeton.cs.algs4.DirectedEdge;
 import edu.princeton.cs.algs4.EdgeWeightedDigraph;
 import edu.princeton.cs.algs4.Heap;
 
+/**
+ * This method tests our GreenLight.java class using two different test cases.
+ * @author Gundeep
+ *
+ */
 public class GreenLightTest {
+	
+	// Variables to be used throughout the class
 	
 	private static List<String> path;
 
@@ -31,6 +37,14 @@ public class GreenLightTest {
 	private static String destination;
 
 	@Before
+	/**
+	 * The following method is used to set up the first test case.
+	 * The code in the method is directly from the GreenLight.java class, except for the inputs which are determined to be from
+	 * Drake University to Des Moines Airport.
+	 * 
+	 * This test case was chosen to represent a typical scenario, the two locations are located in the same city and it is a route someone might actually want to take.
+	 * @throws Exception
+	 */
 	public void setUp1() throws Exception {
 		
 		double originLat = 0;
@@ -50,9 +64,9 @@ public class GreenLightTest {
 
 			// Get the origin and turn it into lat/lng points:
 			
-			origin = "Drake University";
+			origin = "Drake University, Iowa";
 			
-			destination = "Des Moines Airport";
+			destination = "Des Moines Airport, Iowa";
 
 			origin = GoogleMapsGeocoder.getCoordinates(origin);
 
@@ -120,6 +134,16 @@ public class GreenLightTest {
 	}
 	
 	@Before
+	/**
+	 * The following method is used to set up the second test case.
+	 * The code in the method is directly from the GreenLight.java class, except for the inputs which are determined to be from
+	 * Sioux City to Davenport.
+	 * 
+	 * This test case was chosen to represent an edge case, as the two locations are not only located very far from eachother, but are located 
+	 * on the borders of the state on the western and eastern edges of Iowa. This is done to show that our program will still work even if the input
+	 * locations are close to being out of the state.
+	 * @throws Exception
+	 */
 	public void setUp2() throws Exception {
 		
 		double originLat = 0;
@@ -139,9 +163,9 @@ public class GreenLightTest {
 
 			// Get the origin and turn it into lat/lng points:
 			
-			origin = "Siox City";
+			origin = "Sioux City, Iowa";
 			
-			destination = "Iowa City";
+			destination = "Davenport, Iowa";
 
 			origin = GoogleMapsGeocoder.getCoordinates(origin);
 
@@ -209,6 +233,11 @@ public class GreenLightTest {
 	}
 	
 	@Test
+	/**
+	 * This method tests the first test case by iterating through the generated path, and then iterating through the array of all collision locations in the dataset.
+	 * It checks if every location in path is a real collision in our dataset.
+	 * @throws Exception
+	 */
 	public void test1() throws Exception {
 		
 		setUp1();
@@ -235,6 +264,12 @@ public class GreenLightTest {
 		}
 	}
 	
+	@Test
+	/**
+	 * This method tests the first test case by iterating through the generated path, and then iterating through the array of all collision locations in the dataset.
+	 * It checks if every location in path is a real collision in our dataset.
+	 * @throws Exception
+	 */
 	public void test2() throws Exception {
 		
 		setUp2();
@@ -260,4 +295,3 @@ public class GreenLightTest {
 			exist = 0;
 		}
 	}
-}
