@@ -244,12 +244,14 @@ public class GreenLightTest {
 		
 		int exist = 0;
 				
+		// dataset contains an array of all the nodes of collisions in the dataset
 		Collision[] dataset = Data.getArray();
 		
 		for(int i = 0; i < path.size() ; i++){
 			
 			for(int j = 0; j < dataset.length ; j++){
 				
+				// If the location in the path is found in the data set, exist equals 1
 				if( path.get(i).equals(dataset[j].getLat() + "," + dataset[j].getLng())){
 					
 					exist = 1;
@@ -258,6 +260,7 @@ public class GreenLightTest {
 			
 			}
 			
+			// Exist will be 1 if the ith index of path was found within dataset
 			equals(exist == 1);
 			
 			exist = 0;
@@ -276,12 +279,14 @@ public class GreenLightTest {
 		
 		int exist = 0;
 				
+		// dataset contains an array of all the nodes of collisions in the dataset
 		Collision[] dataset = Data.getArray();
 		
 		for(int i = 0; i < path.size() ; i++){
 			
 			for(int j = 0; j < dataset.length ; j++){
 				
+				// If the location in the path is found in the data set, exist equals 1
 				if( path.get(i).equals(dataset[j].getLat() + "," + dataset[j].getLng())){
 					
 					exist = 1;
@@ -290,8 +295,10 @@ public class GreenLightTest {
 			
 			}
 			
+			// Exist will be 1 if the ith index of path was found within dataset
 			equals(exist == 1);
 			
 			exist = 0;
 		}
 	}
+}
