@@ -1,6 +1,8 @@
 package cas2xb3.greenlight;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import edu.princeton.cs.algs4.*;
 
 /**
@@ -22,7 +24,7 @@ public class CrashGraph {
 	 *            The particular collision index
 	 * @return
 	 */
-	private static int[] NSWECrashes(int crashIndex) {
+	public static int[] NSWECrashes(int crashIndex) {
 		crashArr = Data.getArray();
 		int[] NSWEcrash = new int[4];
 		// Data point (90000) outside of reach used as null point
@@ -46,12 +48,13 @@ public class CrashGraph {
 
 		// Compares all the crash nodes within the low and high range
 		for (int i = low; i < hi; i++) {
-			// Stores the latitude and longitude of crash in reference and one being compared
+			// Stores the latitude and longitude of crash in reference and one
+			// being compared
 			double otherLat = crashArr[i].getLat();
 			double thisLat = crashArr[crashIndex].getLat();
 			double otherLong = crashArr[i].getLng();
 			double thisLong = crashArr[crashIndex].getLng();
-			// Stores the spotlight range to find crashes 
+			// Stores the spotlight range to find crashes
 			double posEdge = otherLong + (thisLat - thisLong);
 			double negEdge = -otherLong + (thisLat + thisLong);
 
@@ -78,7 +81,8 @@ public class CrashGraph {
 				NSWEcrash[3] = i;
 			}
 		}
-		//Returns the closest northern, southern, western, and eastern crashes to the crash in reference
+		// Returns the closest northern, southern, western, and eastern crashes
+		// to the crash in reference
 		return NSWEcrash;
 	}
 
@@ -101,25 +105,29 @@ public class CrashGraph {
 			int e = NSWEcrash[3];
 			// Confirms that the crash is not connected to a null point
 			if (n != 90000) {
-				// Creates edge from the crash in reference to the closest northern crash
+				// Creates edge from the crash in reference to the closest
+				// northern crash
 				DirectedEdge northC = new DirectedEdge(i, n, (crashArr[i]).getEquation() + (crashArr[n]).getEquation());
 				G.addEdge(northC);
 			}
 			// Confirms that the crash is not connected to a null point
 			if (s != 90000) {
-				// Creates edge from the crash in reference to the closest southern crash
+				// Creates edge from the crash in reference to the closest
+				// southern crash
 				DirectedEdge southC = new DirectedEdge(i, s, (crashArr[i]).getEquation() + (crashArr[s]).getEquation());
 				G.addEdge(southC);
 			}
 			// Confirms that the crash is not connected to a null point
 			if (w != 90000) {
-				// Creates edge from the crash in reference to the closest western crash
+				// Creates edge from the crash in reference to the closest
+				// western crash
 				DirectedEdge westC = new DirectedEdge(i, w, (crashArr[i]).getEquation() + (crashArr[w]).getEquation());
 				G.addEdge(westC);
 			}
 			// Confirms that the crash is not connected to a null point
 			if (e != 90000) {
-				// Creates edge from the crash in reference to the closest eastern crash
+				// Creates edge from the crash in reference to the closest
+				// eastern crash
 				DirectedEdge eastC = new DirectedEdge(i, e, (crashArr[i]).getEquation() + (crashArr[e]).getEquation());
 				G.addEdge(eastC);
 			}
@@ -127,4 +135,5 @@ public class CrashGraph {
 		// Returns the complete graph
 		return G;
 	}
+
 }
