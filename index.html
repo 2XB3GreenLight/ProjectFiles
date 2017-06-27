@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>My webpage</title>
+	</head>
+
+
+	<body>
+	</body>
+	
+	<script>
+		var turn = 0;
+		
+		var b1 = document.createElement("button");
+		b1.innerHTML = "\xa0\xa0";
+		var b2 = document.createElement("button");
+		b2.innerHTML = "\xa0\xa0";
+		var b3 = document.createElement("button");
+		b3.innerHTML = "\xa0\xa0";
+		var b4 = document.createElement("button");
+		b4.innerHTML = "\xa0\xa0";
+		var b5 = document.createElement("button");
+		b5.innerHTML = "\xa0\xa0";
+		var b6 = document.createElement("button");
+		b6.innerHTML = "\xa0\xa0";
+		var b7 = document.createElement("button");
+		b7.innerHTML = "\xa0\xa0";
+		var b8 = document.createElement("button");
+		b8.innerHTML = "\xa0\xa0";
+		var b9 = document.createElement("button");
+		b9.innerHTML = "\xa0\xa0";
+
+
+		
+		var body = document.getElementsByTagName("body")[0];
+		body.appendChild(b1);
+		body.appendChild(b2);
+		body.appendChild(b3);
+		document.write("<br>");
+		body.appendChild(b4);
+		body.appendChild(b5);
+		body.appendChild(b6);
+		document.write("<br>");
+		body.appendChild(b7);
+		body.appendChild(b8);
+		body.appendChild(b9);
+		
+
+		
+		b1.addEventListener ("click", function() {
+			if(Boolean(b1.innerHTML == "&nbsp;&nbsp;")){
+				if(Boolean(turn == 0)){
+					b1.innerHTML = 0;
+					turn = 1;
+				} else {
+					b1.innerHTML = 1;
+					turn = 0;
+				}
+			}
+			if(Boolean(check() == 3)){
+				alert("Draw!");
+				reset();
+			} else if(Boolean(check() != 2)){
+				alert(check() + " wins!");
+				reset();
+			}
+		});
+		
+		b2.addEventListener ("click", function() {
+			if(Boolean(b2.innerHTML == "&nbsp;&nbsp;")){
+				if(Boolean(turn == 0)){
+					b2.innerHTML = 0;
+					turn = 1;
+				} else {
+					b2.innerHTML = 1;
+					turn = 0;
+				}
+			}
+			if(Boolean(check() == 3)){
+				alert("Draw!");
+				reset();
+			} else if(Boolean(check() != 2)){
+				alert(check() + " wins!");
+				reset();
+			}
+			
+		});
+		
+		b3.addEventListener ("click", function() {
+			if(Boolean(b3.innerHTML == "&nbsp;&nbsp;")){
+				if(Boolean(turn == 0)){
+					b3.innerHTML = 0;
+					turn = 1;
+				} else {
+					b3.innerHTML = 1;
+					turn = 0;
+				}
+			}
+			if(Boolean(check() == 3)){
+				alert("Draw!");
+				reset();
+			} else if(Boolean(check() != 2)){
+				alert(check() + " wins!");
+				reset();
+			}
+			
+		});
+		
+		b4.addEventListener ("click", function() {
+			if(Boolean(b4.innerHTML == "&nbsp;&nbsp;")){
+				if(Boolean(turn == 0)){
+					b4.innerHTML = 0;
+					turn = 1;
+				} else {
+					b4.innerHTML = 1;
+					turn = 0;
+				}
+			}
+			if(Boolean(check() == 3)){
+				alert("Draw!");
+				reset();
+			} else if(Boolean(check() != 2)){
+				alert(check() + " wins!");
+				reset();
+			}
+		});
+		
+		b5.addEventListener ("click", function() {
+			if(Boolean(b5.innerHTML == "&nbsp;&nbsp;")){
+				if(Boolean(turn == 0)){
+					b5.innerHTML = 0;
+					turn = 1;
+				} else {
+					b5.innerHTML = 1;
+					turn = 0;
+				}
+			}
+			if(Boolean(check() == 3)){
+				alert("Draw!");
+				reset();
+			} else if(Boolean(check() != 2)){
+				alert(check() + " wins!");
+				reset();
+			}
+		});
+		
+		b6.addEventListener ("click", function() {
+			if(Boolean(b6.innerHTML == "&nbsp;&nbsp;")){
+				if(Boolean(turn == 0)){
+					b6.innerHTML = 0;
+					turn = 1;
+				} else {
+					b6.innerHTML = 1;
+					turn = 0;
+				}
+			}
+			if(Boolean(check() == 3)){
+				alert("Draw!");
+				reset();
+			} else if(Boolean(check() != 2)){
+				alert(check() + " wins!");
+				reset();
+			}
+			
+		});
+		
+		b7.addEventListener ("click", function() {
+			if(Boolean(b7.innerHTML == "&nbsp;&nbsp;")){
+				if(Boolean(turn == 0)){
+					b7.innerHTML = 0;
+					turn = 1;
+				} else {
+					b7.innerHTML = 1;
+					turn = 0;
+				}
+			}
+			if(Boolean(check() == 3)){
+				alert("Draw!");
+				reset();
+			} else if(Boolean(check() != 2)){
+				alert(check() + " wins!");
+				reset();
+			}
+			
+		});
+		
+		b8.addEventListener ("click", function() {
+			if(Boolean(b8.innerHTML == "&nbsp;&nbsp;")){
+				if(Boolean(turn == 0)){
+					b8.innerHTML = 0;
+					turn = 1;
+				} else {
+					b8.innerHTML = 1;
+					turn = 0;
+				}
+			}
+			if(Boolean(check() == 3)){
+				alert("Draw!");
+				reset();
+			} else if(Boolean(check() != 2)){
+				alert(check() + " wins!");
+				reset();
+			}
+			
+		});
+		
+		b9.addEventListener ("click", function() {
+			if(Boolean(b9.innerHTML == "&nbsp;&nbsp;")){
+				if(Boolean(turn == 0)){
+					b9.innerHTML = 0;
+					turn = 1;
+				} else {
+					b9.innerHTML = 1;
+					turn = 0;
+				}
+			}
+			if(Boolean(check() == 3)){
+				alert("Draw!");
+				reset();
+			} else if(Boolean(check() != 2)){
+				alert(check() + " wins!");
+				reset();
+			}
+			
+			
+		});
+		
+		
+		
+		
+		
+		
+		
+		function check(){
+			if(Boolean(b1.innerHTML == b2.innerHTML && b1.innerHTML == b3.innerHTML && b1.innerHTML != "&nbsp;&nbsp;")){
+				return b1.innerHTML;
+			} else if(Boolean(b4.innerHTML == b5.innerHTML && b4.innerHTML == b6.innerHTML && b4.innerHTML != "&nbsp;&nbsp;")){
+				return b4.innerHTML;
+			} else if (Boolean(b7.innerHTML == b8.innerHTML && b7.innerHTML == b9.innerHTML && b7.innerHTML != "&nbsp;&nbsp;")){
+				return b7.innerHTML;
+			} else if (Boolean(b1.innerHTML == b4.innerHTML && b4.innerHTML == b7.innerHTML && b1.innerHTML != "&nbsp;&nbsp;")){
+				return b1.innerHTML;
+			} else if (Boolean(b2.innerHTML == b5.innerHTML && b2.innerHTML == b8.innerHTML && b2.innerHTML != "&nbsp;&nbsp;")){
+				return b2.innerHTML;
+			} else if (Boolean(b3.innerHTML == b6.innerHTML && b3.innerHTML == b9.innerHTML && b3.innerHTML != "&nbsp;&nbsp;")){
+				return b3.innerHTML;
+			} else if (Boolean(b1.innerHTML == b5.innerHTML && b1.innerHTML == b9.innerHTML && b1.innerHTML != "&nbsp;&nbsp;")){
+				return b1.innerHTML;
+			} else if (Boolean(b3.innerHTML == b5.innerHTML && b3.innerHTML == b7.innerHTML && b3.innerHTML != "&nbsp;&nbsp;")){
+				return b3.innerHTML;
+			} else if (Boolean(b1.innerHTML != "&nbsp;&nbsp;" && b2.innerHTML != "&nbsp;&nbsp;" && b3.innerHTML != "&nbsp;&nbsp;" && b4.innerHTML != "&nbsp;&nbsp;" && b5.innerHTML != "&nbsp;&nbsp;" && b6.innerHTML != "&nbsp;&nbsp;" && b7.innerHTML != "&nbsp;&nbsp;" && b8.innerHTML != "&nbsp;&nbsp;" && b9.innerHTML != "&nbsp;&nbsp;")) {
+				return 3;
+			} else {
+				return 2;
+			}
+		}
+		
+		function reset(){
+			b1.innerHTML = "\xa0\xa0";
+			b2.innerHTML = "\xa0\xa0";
+			b3.innerHTML = "\xa0\xa0";
+			b4.innerHTML = "\xa0\xa0";
+			b5.innerHTML = "\xa0\xa0";
+			b6.innerHTML = "\xa0\xa0";
+			b7.innerHTML = "\xa0\xa0";
+			b8.innerHTML = "\xa0\xa0";
+			b9.innerHTML = "\xa0\xa0";
+		}
+		
+	</script>
+
+
+
+
+
+
+</html>
+
